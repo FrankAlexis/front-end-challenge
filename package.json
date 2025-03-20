@@ -1,0 +1,40 @@
+{
+  "name": "front-end-challenge",
+  "version": "1.0.0",
+  "main": "index.js",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "install:web": "cd ./apps/web && npm install",
+    "build:lib": "cd ./packages/ui-library && npm install",
+    "build:app": "turbo run build",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "prepare": "npx lefthook install",
+    "commit": "cz"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.0",
+    "@types/jest": "^29.5.14",
+    "@typescript-eslint/eslint-plugin": "^8.25.0",
+    "@typescript-eslint/parser": "^8.25.0",
+    "commitizen": "^4.3.1",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint-plugin-react": "^7.37.4",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "lefthook": "^1.11.3",
+    "turbo": "^2.4.4"
+  },
+  "packageManager": "npm@10.8.2",
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}

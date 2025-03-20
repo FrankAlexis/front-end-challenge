@@ -1,0 +1,10 @@
+pre-commit:
+  commands:
+    lint:
+      glob: "*.{ts,tsx}"
+      run: npm run lint
+pre-push:
+  commands:
+    lint:
+      glob: "*.{ts,tsx}"
+      run: npm run lint

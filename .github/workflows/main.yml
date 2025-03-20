@@ -1,0 +1,50 @@
+name: Deploy to S3 and Invalidate CloudFront
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    name: Deploy to S3 and Invalidate CloudFront
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Node.js (usa la misma versión que tu proyecto)
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install Lefthook
+        run: npx lefthook install
+
+      # Install dependencies and build the project
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install web dependencies
+        run: npm run install:web
+
+      - name: Build library
+        run: npm run build:lib
+
+      - name: Build app
+        run: npm run build:app
+
+      # Configure AWS credentials
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      # Sync to S3 using AWS CLI
+      - name: Sync files to S3
+        run: aws s3 sync ./apps/web/dist s3://${{ secrets.AWS_BUCKET_NAME }} --delete
