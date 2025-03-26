@@ -13,7 +13,7 @@ import {
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth, useCart } from '@/infra/hooks'
-import { Button } from 'ui-library'
+import { Button } from '@frankalexis/ui-library'
 
 export const Header = () => {
   const navigate = useNavigate()

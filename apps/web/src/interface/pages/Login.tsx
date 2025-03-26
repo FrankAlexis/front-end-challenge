@@ -9,7 +9,7 @@ import {
 } from '@mui/material'
 import { useAuth } from '@/infra/hooks'
 import { Controller, useForm } from 'react-hook-form'
-import { Button } from 'ui-library'
+import { Button } from '@frankalexis/ui-library'
 
 interface LoginFormValues {
   email: string

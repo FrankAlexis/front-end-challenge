@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card, CardMedia, CardContent } from '@mui/material'
-import { Button } from 'ui-library'
+import { Button } from '@frankalexis/ui-library'
 import { Link } from 'react-router-dom'
 import { categories, categoryImages } from '@/infra/utils'
 

@@ -9,7 +9,7 @@ import {
 import { useCart } from '@/infra/hooks'
 import AddIcon from '@mui/icons-material/Add'
 import RemoveIcon from '@mui/icons-material/Remove'
-import { Button } from 'ui-library'
+import { Button } from '@frankalexis/ui-library'
 import { Product } from 'src/domain'
 import { formatPrice } from '@/infra/utils'
 

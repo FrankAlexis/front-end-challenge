@@ -12,7 +12,7 @@ import {
   Select,
   TextField,
 } from '@mui/material'
-import { Button } from 'ui-library'
+import { Button } from '@frankalexis/ui-library'
 
 export const ShippingForm: React.FC<ShippingFormProps> = ({ onSubmit }) => {
   const { countries } = useCountries()

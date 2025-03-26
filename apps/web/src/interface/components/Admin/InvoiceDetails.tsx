@@ -7,7 +7,7 @@ import {
 } from '@/interface/components'
 
 import type { Invoice } from 'src/domain'
-import { Button } from 'ui-library'
+import { Button } from '@frankalexis/ui-library'
 import { Link } from 'react-router-dom'
 
 interface InvoiceDetailsProps {
