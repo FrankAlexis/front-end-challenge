@@ -1,5 +1,5 @@
 import { Invoice, Product, CartStore, ShippingFormData } from "@/domain";
-import { generateUUID } from "@/infra/utils";
+import { setInitialProducts } from "../store/mocks";
 
 interface Params<T> {
     get: () => T;
@@ -73,7 +73,7 @@ export class CartUseCase {
         const total = subtotal + tax;
 
         const invoice: Invoice = {
-            id: generateUUID(),
+            id: new Date().getTime().toString(),
             date: new Date().toISOString(),
             items: cart,
             subtotal,
@@ -82,13 +82,33 @@ export class CartUseCase {
             shippingInfo,
         };
 
+        const products = CartUseCase.updateStockInStorage({ get, set });
+
         set((state) => ({
+            ...state,
             invoices: [...state.invoices, invoice],
-            products: state.products,
+            products,
             cart: [],
         }));
 
+
         return invoice;
+    }
+
+    static updateStockInStorage({ get }: Params<CartStore>) {
+        const cart = get().cart;
+        const products = get().products.map((item) => {
+            const product = cart.find((p) => p.id === item.id);
+            if (product) {
+                return {
+                    ...item,
+                    stock: item.stock - product.quantity
+                };
+            }
+            return item;
+        });
+        setInitialProducts(products);
+        return products;
     }
 
     static clear({ set }: Params<CartStore>) {

@@ -1,4 +1,3 @@
-import { Typography, Divider } from '@mui/material'
 import type { ShippingFormData } from 'src/domain'
 
 interface InvoiceCustomerInfoProps {
@@ -9,16 +8,15 @@ export const InvoiceCustomerInfo = ({
   shippingInfo,
 }: InvoiceCustomerInfoProps) => {
   return (
-    <>
-      <Typography variant='h6' component='h4' gutterBottom>
-        Client
-      </Typography>
-      <Divider sx={{ my: 1 }} />
-
-      <Typography variant='subtitle1'>{shippingInfo.name}</Typography>
-      <Typography variant='body2'>{shippingInfo.email}</Typography>
-      <Typography variant='body2'>{shippingInfo.phone}</Typography>
-      <Typography variant='body2'>{shippingInfo.country}</Typography>
-    </>
+    <div className='space-y-1'>
+      <h4 className='text-lg font-semibold'>Client</h4>
+      <hr className='border-t border-gray-300' />
+      <div className='text-left'>
+        <p className='text-base font-medium '>{shippingInfo.name}</p>
+        <p className='text-sm '>{shippingInfo.email}</p>
+        <p className='text-sm '>{shippingInfo.phone}</p>
+        <p className='text-sm'>{shippingInfo.country}</p>
+      </div>
+    </div>
   )
 }

@@ -51,6 +51,16 @@ export const Header = () => {
             <>
               <Button
                 variant='text'
+                component={Link}
+                to='/admin'
+                sx={{
+                  display: { xs: 'none', sm: 'inline-flex', color: 'white' },
+                }}
+              >
+                Invoices
+              </Button>
+              <Button
+                variant='text'
                 onClick={handleMenu}
                 endIcon={<KeyboardArrowDown />}
                 sx={{

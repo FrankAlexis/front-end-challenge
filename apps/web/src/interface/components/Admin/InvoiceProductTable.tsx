@@ -1,5 +1,4 @@
 import {
-  Typography,
   Table,
   TableBody,
   TableCell,
@@ -9,25 +8,19 @@ import {
   Paper,
 } from '@mui/material'
 import type { CartItem } from 'src/domain'
-import { formatPrice } from '@/infra/utils'
 
 interface InvoiceProductsTableProps {
   items: CartItem[]
 }
 
 export const InvoiceProductsTable = ({ items }: InvoiceProductsTableProps) => {
-  const total = items
-    .reduce((sum, item) => sum + item.price * item.quantity, 0)
-    .toLocaleString()
   return (
     <>
-      <Typography variant='h6' component='h4' gutterBottom>
-        Products
-      </Typography>
       <TableContainer
         component={Paper}
         variant='outlined'
         sx={{ overflow: 'hidden' }}
+        className='rounded-lg mb-4'
       >
         <Table>
           <TableHead>
@@ -106,15 +99,6 @@ export const InvoiceProductsTable = ({ items }: InvoiceProductsTableProps) => {
                 </TableCell>
               </TableRow>
             ))}
-            <TableRow>
-              <TableCell colSpan={3} />
-              <TableCell align='right' sx={{ fontWeight: 'bold' }}>
-                Total:
-              </TableCell>
-              <TableCell align='right' sx={{ fontWeight: 'bold' }}>
-                {formatPrice(total)}
-              </TableCell>
-            </TableRow>
           </TableBody>
         </Table>
       </TableContainer>

@@ -16,7 +16,7 @@ export class AuthUseCase {
             id: generateUUID(),
             name: email.split("@")[0],
             email,
-            role: 'admin'
+            role: email.search('admin') >= 0 ? 'admin' : 'user',
         };
 
         set(state => ({

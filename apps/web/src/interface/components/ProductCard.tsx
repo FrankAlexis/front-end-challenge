@@ -67,7 +67,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               disabled={product.stock === 0 || quantityInCart >= product.stock}
               onClick={() => addToCart(product)}
               aria-label={product.stock === 0 ? 'Out of stock' : 'Add to cart'}
-              className='w-full text-blue-300'
+              className={
+                product.stock === 0
+                  ? 'cursor-not-allowed w-full text-gray-400'
+                  : 'w-full text-blue-300 cursor-pointer'
+              }
             >
               {product.stock === 0 ? 'Out of stock' : 'Add to cart'}
             </Button>

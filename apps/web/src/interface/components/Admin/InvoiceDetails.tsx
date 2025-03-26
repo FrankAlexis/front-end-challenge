@@ -1,4 +1,4 @@
-import { Box, Typography, Paper, Grid2 } from '@mui/material'
+import { Box, Paper } from '@mui/material'
 import PrintIcon from '@mui/icons-material/Print'
 import {
   InvoiceCustomerInfo,
@@ -8,6 +8,7 @@ import {
 
 import type { Invoice } from 'src/domain'
 import { Button } from 'ui-library'
+import { Link } from 'react-router-dom'
 
 interface InvoiceDetailsProps {
   invoice: Invoice
@@ -18,44 +19,46 @@ export const InvoiceDetails = ({ invoice }: InvoiceDetailsProps) => {
     <Paper sx={{ p: 3, borderRadius: 1, height: '100%' }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 3 }}>
         <Box>
-          <Typography
-            variant='h5'
-            component='h3'
-            gutterBottom
-            sx={{ fontWeight: 'medium', color: '#03356b' }}
-          >
-            Invoice #{invoice.id.substring(0, 8)}
-          </Typography>
-          <Typography variant='body2' color='text.secondary'>
-            {new Date(invoice.date).toLocaleString()}
-          </Typography>
+          <h3 className='text-2xl font-bold  flex flex-col '>
+            <span className='text-slate-800 text-left'>
+              <span className='text-slate-500 font-normal'>Invoice</span> #
+              {invoice.id.substring(0, 8)}
+            </span>
+            <span className='text-slate-500 font-normal'>
+              Date: {new Date(invoice.date).toLocaleString()}
+            </span>
+          </h3>
         </Box>
         <Button
           variant='text'
           startIcon={<PrintIcon />}
           onClick={() => window.print()}
-          sx={{
-            color: '#03356b',
-          }}
+          className='text-blue-500 hover:text-blue-700'
         >
           Print
         </Button>
       </Box>
 
-      <Grid2 container spacing={3} sx={{ mb: 4 }}>
-        <Grid2>
+      <div className='divider'>
+        <div className='mb-2'>
           <InvoiceCustomerInfo shippingInfo={invoice.shippingInfo} />
-        </Grid2>
-        <Grid2>
+        </div>
+        <div className=''>
           <InvoiceSummary
             subtotal={invoice.subtotal}
             tax={invoice.tax}
             total={invoice.total}
           />
-        </Grid2>
-      </Grid2>
-
+        </div>
+      </div>
+      <div className='divider' />
       <InvoiceProductsTable items={invoice.items} />
+
+      <Button variant='text' component={Link} to='/products'>
+        <span className='text-blue-500 hover:text-blue-700'>
+          Continue shopping
+        </span>
+      </Button>
     </Paper>
   )
 }

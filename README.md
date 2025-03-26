@@ -76,7 +76,36 @@ npm run storybook
 
 ### 🚀 Monorepo with Turborepo
 
-I used **Turborepo** to structure the project as a monorepo, facilitating component reuse, centralizing configurations, and efficiently managing dependencies.
+The project is structured as a **monorepo** using **Turborepo**, which offers several advantages:
+
+- **Code Reusability**: Centralized management of shared components and utilities across multiple packages.
+- **Improved Developer Experience**: Simplified workflows for building, testing, and deploying.
+- **Efficient Builds**: Caching and parallelization reduce build times significantly.
+- **Centralized Configuration**: Shared ESLint, TypeScript, and other configurations ensure consistency across the codebase.
+
+#### Implementation
+
+1. **Setup Turborepo**:
+
+   - Initialize the monorepo with `npx create-turbo@latest`.
+
+2. **Project Structure**:
+
+   - `apps/`: Contains the main application.
+   - `packages/ui-library`: Houses the reusable UI components.
+
+3. **Shared Configurations**:
+
+   - Centralized ESLint, TypeScript, and Tailwind CSS configurations are stored in the root directory and shared across all packages.
+
+4. **Independent Development**:
+
+   - Each package can be developed and tested independently, e.g., running Storybook for the `ui-library`.
+
+5. **Build and Deployment**:
+   - Turborepo's caching mechanism ensures efficient builds, and the monorepo structure simplifies deployment pipelines.
+
+This setup enhances scalability and maintainability, making it easier to manage a growing codebase.
 
 ### 🔄 State Management with Zustand
 

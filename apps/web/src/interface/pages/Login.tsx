@@ -32,9 +32,9 @@ const Login = () => {
     },
   })
 
-  const onSubmit = async (data: LoginFormValues) => {
+  const onSubmit = (data: LoginFormValues) => {
     try {
-      const success = await login(data.email, data.password)
+      const success = login(data.email, data.password)
       if (!success) {
         setError('password', {
           type: 'manual',

@@ -127,9 +127,15 @@ export const loadInitialProducts = (): Product[] => {
   const storedProducts = localStorage.getItem("initial-products");
 
   if (storedProducts) {
+    console.log("Initial", JSON.parse(storedProducts));
     return JSON.parse(storedProducts);
   }
 
   localStorage.setItem("initial-products", JSON.stringify(PRODUCT_MOCKS));
   return PRODUCT_MOCKS;
 };
+
+export const setInitialProducts = (products: Product[]) => {
+  console.log("Setting initial products in local storage", JSON.stringify(products));
+  localStorage.setItem("initial-products", JSON.stringify(products));
+}

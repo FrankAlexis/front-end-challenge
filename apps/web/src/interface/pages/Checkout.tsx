@@ -14,17 +14,24 @@ import AddIcon from '@mui/icons-material/Add'
 import RemoveIcon from '@mui/icons-material/Remove'
 import { ShippingForm } from '../components/ShippingForm'
 import { useInvoices, useCart } from '@/infra/hooks'
-import { CartItem, ShippingFormData } from 'src/domain'
+import { CartItem, Invoice, ShippingFormData } from 'src/domain'
 import { formatPrice } from '@/infra/utils'
+import { InvoiceDetails } from '../components'
 
 const Checkout: React.FC = () => {
-  const { cart, addToCart, removeFromCart, total } = useCart()
+  const { cart, addToCart, removeFromCart } = useCart()
   const [lastCartItems, setLastCartItems] = useState<CartItem[]>([])
+  const [invoice, setInvoice] = useState<Invoice | null>(null)
   const { generateInvoice } = useInvoices()
 
+  const total = cart.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  )
   const handleShippingSubmit = (shippingData: ShippingFormData) => {
     setLastCartItems(cart)
-    generateInvoice(shippingData)
+    const invoice = generateInvoice(shippingData)
+    setInvoice(invoice)
   }
 
   if (cart.length === 0 && lastCartItems.length === 0) {
@@ -39,7 +46,7 @@ const Checkout: React.FC = () => {
   return (
     <Container maxWidth='md' sx={{}}>
       <Paper elevation={3} sx={{ p: 4, width: '100%', borderRadius: 2 }}>
-        {lastCartItems.length === 0 ? (
+        {!invoice ? (
           <>
             <Typography variant='h4' component='h2' gutterBottom>
               Details
@@ -95,22 +102,7 @@ const Checkout: React.FC = () => {
             <Typography variant='h4' component='h2' gutterBottom>
               Purchase Completed!
             </Typography>
-            <List>
-              {lastCartItems.map((item) => (
-                <ListItem key={item.id}>
-                  <ListItemText
-                    primary={item.name}
-                    secondary={`Stock: ${item.quantity} * $${item.price}`}
-                  />
-                </ListItem>
-              ))}
-            </List>
-            <Typography variant='h6' align='center' sx={{ mt: 2 }}>
-              Total: {formatPrice(total)}
-            </Typography>
-            <Typography variant='body1'>
-              The invoice has been generated successfully.
-            </Typography>
+            <InvoiceDetails invoice={invoice} />
           </Box>
         )}
       </Paper>
