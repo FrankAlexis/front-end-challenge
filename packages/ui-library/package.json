@@ -1,12 +1,14 @@
 {
-  "name": "ui-library",
-  "version": "1.0.0",
+  "name": "@frankalexis/ui-library",
+  "version": "1.0.1",
+  "private": false,
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsup",
+    "prepublishOnly": "npm run build",
     "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",

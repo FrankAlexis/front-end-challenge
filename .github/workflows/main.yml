@@ -31,9 +31,6 @@ jobs:
       - name: Install web dependencies
         run: npm run install:web
 
-      - name: Build library
-        run: npm run build:lib
-
       - name: Build app
         run: npm run build:app
 

@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { ProductCard } from '../ProductCard'
-import { CartItem, ProductCategory } from '../../types'
+import { CartItem, ProductCategory } from '@/domain'
 
 const mockAddToCart = jest.fn()
 const mockRemoveFromCart = jest.fn()
